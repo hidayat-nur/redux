@@ -9,7 +9,12 @@ const rootReducer = (state = initialState, action) => {
     case 'ADD_COUNT':
       return {
         ...state,
-        count: state.count + action.addition
+        count: state.count + action.value
+      }
+    case 'REDUCE_COUNT':
+      return {
+        ...state,
+        count: state.count - action.value
       }
     default:
       break;
@@ -20,11 +25,16 @@ const rootReducer = (state = initialState, action) => {
 // store
 const store = redux.createStore(rootReducer)
 
-console.log("store:", store.getState())
+console.log("store 1:", store.getState())
 
-// action
-store.dispatch({ type: 'ADD_COUNT', addition: 5})
-
-console.log("store:", store.getState())
 
 // subscription
+store.subscribe(() => {
+  console.log("store change:", store.getState())
+})
+
+// action
+store.dispatch({ type: 'ADD_COUNT', value: 5})
+store.dispatch({ type: 'REDUCE_COUNT', value: 3})
+
+console.log("store 2:", store.getState())
