@@ -1,4 +1,4 @@
-const redux = require('redux')
+import { createStore } from "redux"
 
 // reducer
 const initialState = {
@@ -23,7 +23,7 @@ const rootReducer = (state = initialState, action) => {
  }
 
 // store
-const store = redux.createStore(rootReducer)
+const store = createStore(rootReducer)
 
 console.log("store 1:", store.getState())
 
